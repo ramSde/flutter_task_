@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -29,6 +30,7 @@ class UserController extends GetxController {
       }
     } catch (e) {
       errorMessage('Error: $e');
+      _showSnackbar(e.toString());
     } finally {
       isLoading(false);
     }
@@ -42,5 +44,15 @@ class UserController extends GetxController {
         return user.name.toLowerCase().contains(query.toLowerCase());
       }).toList();
     }
+  }
+
+   void _showSnackbar(String message) {
+    Get.snackbar(
+      'Error',
+      message,
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.red,
+      colorText: Colors.white,
+    );
   }
 }
